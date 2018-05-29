@@ -21,6 +21,7 @@ export const checkLogin = () => {
 					uid:user.uid
 				}
 			});
+            
 		} else {
 			dispatch({
 				type:'changeStatus',

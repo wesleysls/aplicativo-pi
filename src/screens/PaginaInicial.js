@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { DrawerNavigator } from 'react-navigation';
 
-import ContatoList from './ContatoList';
+import Nutricionistas from './Nutricionistas';
 import MitosVerdades from './MitosVerdades';
 import Perfil from './Perfil';
 import ConversasStack from './ConversasStack';
@@ -14,8 +14,11 @@ const Navegador = DrawerNavigator({
 	Perfil:{
 		screen:Perfil
 	},
-    ContatoList:{
-        	screen:ContatoList
+    Nutricionistas:{
+        	screen:Nutricionistas,
+            navigationOptions:{
+                drawerLabel:'Nutricionistas'
+            }
         },
     MitosVerdades:{
     	screen:MitosVerdades

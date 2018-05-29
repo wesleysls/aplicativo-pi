@@ -10,13 +10,14 @@ import ConversasItem from '../components/ConversaList/ConversasItem';
 export class ConversaList extends Component {
 
 	static navigationOptions = ({navigation}) => ({
-	    title:'Conversas',
+	    header:null
 	});
 
 	constructor(props) {
 		super(props);
 		this.state = {};
-        this.props.getChatList(this.props.uid);
+		let tela = 1;
+        this.props.getChatList(this.props.uid,tela);
         this.conversaClick = this.conversaClick.bind(this);
 	}
 

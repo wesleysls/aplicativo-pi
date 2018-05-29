@@ -5,7 +5,8 @@ import {StackActions} from 'react-navigation';
 import { connect } from 'react-redux';
 import{SignOut} from '../actions/AuthActions';
 import ConversasItem from '../components/ConversaList/ConversasItem';
-import{getChatList,setActiveChat}	from '../actions/ChatActions';	
+import{getChatList,setActiveChat}	from '../actions/ChatActions';
+import { createChat } from '../actions/ChatActions';
 
 export class Perfil extends Component {
 
@@ -15,9 +16,12 @@ export class Perfil extends Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {};
+		this.state = {
+			inputText:'',
+		};
+		let tela = 2;
         this.sair = this.sair.bind(this);
-        this.props.getChatList(this.props.uid);
+        this.props.getChatList(this.props.uid,tela);
         this.conversaClick = this.conversaClick.bind(this);
         this.adicionarConversa = this.adicionarConversa.bind(this);
 	}
@@ -31,7 +35,13 @@ export class Perfil extends Component {
 	}
 
 	adicionarConversa(){
-        alert(this.props.uid);
+
+		let titulo = this.state.inputText;
+        let state = this.state;
+        state.inputText = '';
+        this.setState(state);
+
+        this.props.createChat(this.props.uid,titulo);
 	}
 
 	render() {
@@ -40,9 +50,9 @@ export class Perfil extends Component {
 		}
 		return (
 			<View style={styles.container}>
-			    <View style={styles.header}>
-			        <Button title="Sair" onPress={this.sair}/>
-			    </View>
+			    <TouchableHighlight style={styles.header} onPress={this.sair}>
+			        <Image style={styles.addImage} source={require('../assets/images/logout.png')}/>
+			    </TouchableHighlight>
 			    <View style={styles.corpo}>
 			        <View style={styles.foto}>
                         <Text>foto do usuário</Text>
@@ -51,7 +61,7 @@ export class Perfil extends Component {
 			    <View style = {styles.inf}>
 			        <Text style={{fontSize:20,marginBottom:10}}>Minhas Conversas</Text>
 			        <View style={styles.addArea}>
-				        <TextInput style={styles.input} onChangeText={this.props.changeEmail}/>	
+				         <TextInput style={styles.input} value={this.state.inputText} onChangeText={(inputText)=>this.setState({inputText})}/>	
 				         <TouchableHighlight style={styles.sendButton} onPress={this.adicionarConversa}>
 			                <Image style={styles.addImage} source={require('../assets/images/add.png')}/>
 				        </TouchableHighlight>  	
@@ -84,7 +94,7 @@ const styles = StyleSheet.create({
     	flex:1,
     	flexDirection:'row',
     	justifyContent:'center',
-    	alignItems:'center',
+    	alignItems:'flex-start',
     	borderBottomWidth:2,
     	borderBottomColor:'white'
     },
@@ -95,11 +105,11 @@ const styles = StyleSheet.create({
 		alignItems:'center',
     },
     foto:{
-    	width:100,
-    	height:100,
+    	width:120,
+    	height:120,
     	backgroundColor:'#cfd8dc',
     	justifyContent:'center',
-    	alignItems:'center'
+		alignItems:'center',
     },
     input:{
 		width:260,
@@ -136,7 +146,7 @@ const mapStateToProps = (state) => {
 	};
 };
 
-const PerfilConnect = connect(mapStateToProps, { SignOut,getChatList,setActiveChat })(Perfil);
+const PerfilConnect = connect(mapStateToProps, { SignOut,getChatList,setActiveChat,createChat})(Perfil);
 export default  PerfilConnect;
 
 

@@ -1,13 +1,26 @@
 import firebase from '../firebaseConnection';
 
-export const  getChatList = (userUid)=>{
+export const  getChatList = (userUid,tela)=>{
     return(dispatch) => {
         firebase.database().ref('usuarios').child(userUid).child('chats').on('value',(snapshot)=>{
              let chats = [];
              snapshot.forEach((childItem)=>{
-                 chats.push({
-                     key:childItem.key  
-                 });    
+                 if(tela == 1){
+                     chats.push({
+                         key:childItem.key,
+                         titulo:childItem.val().titulo,
+                         criador:childItem.val().criador
+                     });
+                 }else{
+                     if(childItem.val().criador == userUid){
+                         chats.push({
+                             key:childItem.key,
+                             titulo:childItem.val().titulo,
+                             criador:childItem.val().criador
+                            });
+                     }
+
+                 } 
              });
 
              dispatch({
@@ -45,7 +58,7 @@ export const  getContactList = (userUid) => {
     };
 };
 
-export const createChat = (userUid1,userUid2)=> {
+export const createChat = (userUid,titulo)=> {
     return (dispatch)=>{
         let newChat = firebase.database().ref('chats').push();
         let chatId = newChat.key;
@@ -59,7 +72,9 @@ export const createChat = (userUid1,userUid2)=> {
                 }); 
 
                 firebase.database().ref('usuarios').child(childItem.key).child('chats').child(chatId).set({
-                    id:chatId
+                    id:chatId,
+                    titulo:titulo,
+                    criador:userUid
                 });
 
             });
