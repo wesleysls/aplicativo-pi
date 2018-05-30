@@ -75,55 +75,10 @@ export const votar = (voto,nutricionista) =>{
             firebase.database().ref('nutricionistas').child(nutricionista).child('media').set(media.toFixed(2));
             alert("Voto compultado com sucesso!");
         });
-        //let media = (soma/votos);
-       // firebase.database().ref('nutricionistas').child(nutricionista).set({
-         //  media:media
-       // });
     }
 }
 
-/*
-export const createChat = (userUid,titulo)=> {
-    return (dispatch)=>{
-        let newChat = firebase.database().ref('chats').push();
-        let chatId = newChat.key;
-
-        firebase.database().ref('usuarios').once('value').then((snapshot)=>{
-            let users = [];
-            snapshot.forEach((childItem)=>{
-
-                newChat.child('membros').child(childItem.key).set({
-                    id:childItem.key
-                }); 
-
-                firebase.database().ref('usuarios').child(childItem.key).child('chats').child(chatId).set({
-                    id:chatId,
-                    titulo:titulo,
-                    criador:userUid
-                });
-
-            });
-        });
-
-        dispatch({
-            type:'setActiveChat',
-            payload:{
-                chatId:chatId
-            }
-        });
-    }
-};
-
-export const setActiveChat = (chatId) =>{
-    return{
-        type:'setActiveChat',
-        payload:{
-            chatId:chatId
-        }
-    };
-};
-
-export const sendMessage = (txt,author,name,chatAtivo) => {
+export const sendComent = (txt,author,name,nutricionista) => {
     return(dispatch) => {
        let currentDate ='';
        let cDate = new Date();
@@ -165,7 +120,7 @@ export const sendMessage = (txt,author,name,chatAtivo) => {
             currentDate+= cDate.getSeconds();
        }
        
-       let msgId = firebase.database().ref('chats').child(chatAtivo).child('mensagens').push();
+       let msgId = firebase.database().ref('nutricionistas').child(nutricionista).child('comentarios').push();
        msgId.set({
           data:currentDate,
           msg:txt,
@@ -174,5 +129,35 @@ export const sendMessage = (txt,author,name,chatAtivo) => {
        });
     };
 };
-*/
+
+export const monitorComent = (nutricionista)=>{
+    return (dispatch) =>{
+        firebase.database().ref('nutricionistas').child(nutricionista).child('comentarios').orderByChild('data').on('value',(snapshot)=>{
+            let arrayMsg = [];
+            snapshot.forEach((childItem)=>{
+                 arrayMsg.push({
+                    key:childItem.key,
+                    date:childItem.val().data,
+                    msg:childItem.val().msg,
+                    uid:childItem.val().uid,
+                    name:childItem.val().name
+                 });
+            });
+
+            dispatch({
+                type:'setActiveComentMessage',
+                payload:{
+                    'coments':arrayMsg
+                }
+            });
+        });  
+    };
+
+};
+export const monitorComentOff = (nutricionista)=>{
+    return(dispatch) =>{
+        firebase.database().ref('nutricionistas').child(nutricionista).child('comentarios').off();
+    };
+
+};
 

@@ -2,7 +2,7 @@ import firebase from '../firebaseConnection';
 
 export const  getChatList = (userUid,tela)=>{
     return(dispatch) => {
-        firebase.database().ref('usuarios').child(userUid).child('chats').on('value',(snapshot)=>{
+        firebase.database().ref('chats').on('value',(snapshot)=>{
              let chats = [];
              snapshot.forEach((childItem)=>{
                  if(tela == 1){
@@ -69,15 +69,12 @@ export const createChat = (userUid,titulo)=> {
 
                 newChat.child('membros').child(childItem.key).set({
                     id:childItem.key
-                }); 
-
-                firebase.database().ref('usuarios').child(childItem.key).child('chats').child(chatId).set({
-                    id:chatId,
-                    titulo:titulo,
-                    criador:userUid
                 });
 
+                newChat.child('titulo').set(titulo);
+                newChat.child('criador').set(userUid);
             });
+            
         });
 
         /*
@@ -195,7 +192,7 @@ export const monitorChat = (chatAtivo)=>{
 };
 export const monitorChatOff = (chatAtivo)=>{
     return(dispatch) =>{
-        firebase.database().ref('chats').child('chatAtivo').child('mensagens').off();
+        firebase.database().ref('chats').child(chatAtivo).child('mensagens').off();
     };
 
 };

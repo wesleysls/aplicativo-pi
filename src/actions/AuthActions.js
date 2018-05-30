@@ -50,7 +50,13 @@ export const SignUpAction =(name,sobreNome,email,password)=> {
                 sobreNome:sobreNome
              });
 
-
+             firebase.database().ref('chats').once('value').then((snapshot)=>{
+                 snapshot.forEach((childItem)=>{
+                    firebase.database().ref('chats').child(childItem.key).child('membros').child(uid).set({
+                        id:uid
+                    });
+                 });
+             });
 
              dispatch({
              	type:'changeUid',

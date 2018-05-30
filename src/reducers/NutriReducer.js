@@ -1,6 +1,7 @@
 const initialState = {
 	nutricionistas:[],
-	perfilAtivo:''
+	perfilAtivo:'',
+	coments:[]
 };
 
 const NutriReducer = (state = initialState, action) => {
@@ -12,8 +13,11 @@ const NutriReducer = (state = initialState, action) => {
 	if(action.type == 'setActivePerfil'){
 		return {...state, perfilAtivo:action.payload.perfilAtivo};
 	}
-	
 
+	if(action.type == 'setActiveComentMessage'){
+		return {...state, coments:action.payload.coments};
+	}
+	
 
 	return state;
 

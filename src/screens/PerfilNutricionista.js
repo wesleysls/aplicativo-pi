@@ -3,7 +3,9 @@ import { View, Text, FlatList,StyleSheet,Button,TouchableHighlight,TextInput,Ima
 import { NavigationActions } from 'react-navigation';
 import {StackActions} from 'react-navigation';
 import { connect } from 'react-redux';
-import {votar} from '../actions/NutriActions';
+import {votar,sendComent,monitorComent,monitorComentOff} from '../actions/NutriActions';
+import firebase from '../firebaseConnection';
+import MensagemItem from '../components/conversaInterna/mensagemItem';	
 
 export class PerfilNutricionista extends Component {
 
@@ -25,7 +27,6 @@ export class PerfilNutricionista extends Component {
 		this.props.nutricionistas.forEach((childItem)=>{
 
 			if(childItem.key == this.props.perfilAtivo){
-
                this.state.nome = childItem.nome;
                this.state.telefone = childItem.telefone;
                this.state.endereco = childItem.endereco;
@@ -38,8 +39,24 @@ export class PerfilNutricionista extends Component {
 		this.votar3 = this.votar3.bind(this);
 		this.votar4 = this.votar4.bind(this);
 		this.votar5 = this.votar5.bind(this);
+		this.sendMsg = this.sendMsg.bind(this);
 	}
 
+	componentDidMount(){
+    	this.props.monitorComent(this.props.perfilAtivo);
+    }
+
+    sendMsg(){
+		let txt = this.state.inputText;
+        let state = this.state;
+        state.inputText = '';
+        this.setState(state);
+
+        firebase.database().ref('usuarios').child(this.props.uid).child('name').on('value',(snapshot)=>{    
+            this.props.sendComent(txt,this.props.uid,snapshot.val(),this.props.perfilAtivo)
+        }); 
+        
+	}
 	votar1(){
 		this.props.votar(parseFloat(1),this.props.perfilAtivo);
 	}
@@ -95,11 +112,14 @@ export class PerfilNutricionista extends Component {
 			        <Text style={styles.txtComent}>Adicione um comentario!</Text>
 			        <View style={styles.addArea}>
 				        <TextInput style={styles.input} value={this.state.inputText} onChangeText={(inputText)=>this.setState({inputText})}/>	
-				        <TouchableHighlight style={styles.sendButton} onPress={this.adicionarConversa}>
+				        <TouchableHighlight style={styles.sendButton} onPress={this.sendMsg}>
 			                <Image style={styles.addImage} source={require('../assets/images/add.png')}/>
 				        </TouchableHighlight>  	
 				    </View>	
 			    </View>
+			    <FlatList style={styles.chatArea} data={this.props.coments}
+				    renderItem={({item})=><MensagemItem data={item} me = 'ninguem'/>}
+				/>
 			</View>
 		);
 	}
@@ -121,7 +141,6 @@ const styles = StyleSheet.create({
     	borderBottomColor:'white'
     },
     inf:{
-    	flex:1,
     	backgroundColor:'#a8119c',
     	justifyContent:'flex-start',
 		alignItems:'center',
@@ -193,17 +212,15 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
 	return {
-		status:state.auth.status,
-		chatAtivo:state.chat.chatAtivo,
-		chats:state.chat.chats,
 		uid:state.auth.uid,
 		perfilAtivo:state.nutri.perfilAtivo,
-		nutricionistas:state.nutri.nutricionistas
+		nutricionistas:state.nutri.nutricionistas,
+		coments:state.nutri.coments
 
 	};
 };
 
-const PerfilNutricionistaConnect = connect(mapStateToProps, {votar})(PerfilNutricionista);
+const PerfilNutricionistaConnect = connect(mapStateToProps, {votar,sendComent,monitorComent,monitorComentOff})(PerfilNutricionista);
 export default  PerfilNutricionistaConnect;
 
 
