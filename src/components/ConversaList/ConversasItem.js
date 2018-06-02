@@ -15,7 +15,7 @@ export default class ConversasItem extends Component{
 	render(){
 		return(
             <TouchableHighlight underlayColor = "#DDDDDD" style = {ConversaItemStyles.buttonArea} onPress = {this.onclick}>
-                <Text>{this.props.data.titulo}</Text>
+                <Text style={{fontWeight:'bold',fontSize:15}}>{this.props.data.titulo}</Text>
             </TouchableHighlight>
 			
 	    );
@@ -23,12 +23,12 @@ export default class ConversasItem extends Component{
 }	
 const ConversaItemStyles = StyleSheet.create({
     buttonArea:{
-        width:300,
-    	height:40,
+    	height:60,
+        width:350,
     	flex:1,
     	justifyContent:'center',
     	paddingLeft:10,
-        borderBottomWidth:2,
+        borderBottomWidth:1,
         borderBottomColor:'#CCCCCC',
     	
 

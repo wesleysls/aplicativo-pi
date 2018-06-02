@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet,Button,FlatList	} from 'react-native';
-import { NavigationActions } from 'react-navigation';
+import { View, Text, StyleSheet,Button,FlatList,TouchableHighlight,Image} from 'react-native';
+import { NavigationActions,DrawerActions } from 'react-navigation';
 import {StackActions} from 'react-navigation';
 import { connect } from 'react-redux';
 import{getMitosList,setActiveArtigo}	from '../actions/MitosActions';
@@ -28,6 +28,11 @@ export class MitosList extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
+			    <View style={styles.header}>
+			        <TouchableHighlight  onPress={()=>this.props.navigation.dispatch(DrawerActions.openDrawer())}>
+			            <Image style={styles.menuImage} source={require('../assets/images/menu.png')}/>
+			        </TouchableHighlight>
+			    </View>
 			    <FlatList
                    data={this.props.artigos}
                    renderItem={({item})=><ArtigosItem data={item} onPress={this.artigoClick}/>}
@@ -44,7 +49,19 @@ const styles = StyleSheet.create({
 		flex:1, 
 		justifyContent:'center',
 		alignItems:'center',
+		backgroundColor:'#EEEEEE'
+	},
+	header:{
+		width:'100%',
+		height:60,
 		backgroundColor:'#a8119c',
+		flexDirection:'row',
+		justifyContent:'flex-start',
+		alignItems:'center'
+	},
+	menuImage:{
+		width:52,
+		height:52
 	}
 });
 

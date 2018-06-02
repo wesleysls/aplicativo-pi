@@ -30,27 +30,24 @@ export default class ArtigosItem extends Component{
 }	
 const ArtigoStyles = StyleSheet.create({
     area:{
-        marginTop:6,
+        marginTop:20,
         marginBottom:10,
-        width:'100%',
-        height:270,
+        width:340,
         justifyContent:'flex-start',
         alignItems:'center',
-        borderBottomWidth:2,
-        borderColor:'black',
         backgroundColor:'white'
-
     },
     foto:{
-        width:350,
+        width:340,
         height:200,
-        backgroundColor:'#cfd8dc',
+        backgroundColor:'#DDDDDD',
         justifyContent:'center',
         alignItems:'center',
     },
     titulo:{
         fontSize:25,
-        textAlign:'center'
+        textAlign:'center',
+        marginBottom:30
     }
     
 });

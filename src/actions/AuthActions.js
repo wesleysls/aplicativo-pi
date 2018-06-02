@@ -10,6 +10,41 @@ export const SignOut = () =>{
     	}
     };
 };
+
+export const getDados = (uid) =>{
+    return(dispatch)=> {
+      firebase.database().ref('usuarios').child(uid).on('value',(snapshot)=>{
+           let nome = snapshot.val().name;
+           let sobreNome = snapshot.val().sobreNome;
+           let estado = snapshot.val().estado;
+           let idade = snapshot.val().idade;
+           let cidade = snapshot.val().cidade;
+           let estadoCivil = snapshot.val().estadoCivil;
+           let sexo = snapshot.val().sexo;
+           
+           let dados = [];
+
+           dados.push({
+               nome:nome,
+               sobreNome:sobreNome,
+               estado:estado,
+               cidade:cidade,
+               idade:idade,
+               sexo:sexo,
+               estadoCivil:estadoCivil
+           });
+
+           dispatch({
+               type:'changeDados',
+               payload:{
+                dados:dados
+               }
+           });
+
+       });
+    };
+};
+
 export const checkLogin = () => {
 
 	return (dispatch) => {
@@ -39,7 +74,7 @@ export const checkLogin = () => {
 
 };
 
-export const SignUpAction =(name,sobreNome,email,password)=> {
+export const SignUpAction =(name,sobreNome,email,password,estado,cidade,sexo,idade,estadoCivil)=> {
     return(dispatch)=>{
     	firebase.auth().createUserWithEmailAndPassword(email,password)
     	.then((user)=>{
@@ -47,7 +82,12 @@ export const SignUpAction =(name,sobreNome,email,password)=> {
              
              firebase.database().ref('usuarios').child(uid).set({
              	name:name,
-                sobreNome:sobreNome
+                sobreNome:sobreNome,
+                estado:estado,
+                cidade:cidade,
+                sexo:sexo,
+                idade:idade,
+                estadoCivil:estadoCivil
              });
 
              firebase.database().ref('chats').once('value').then((snapshot)=>{
@@ -133,6 +173,14 @@ export const changePassword = (pass) =>{
     		pass:pass
     	}
     };	
+};
+export const changeConfirmPassword = (repass) =>{
+    return{
+        type:'changeConfirmPassword',
+        payload:{
+            repass:repass
+        }
+    };  
 };
 
 export const changeName = (name) =>{

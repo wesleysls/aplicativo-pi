@@ -3,6 +3,7 @@ const initialState = {
 	sobreNome:'',
 	email:'',
 	password:'',
+	confirmPassword:'',
 	uid:'',
 	status:0
 };
@@ -20,6 +21,9 @@ const AuthReducer = (state = initialState, action) => {
 	if(action.type == 'changePassword'){
 		return {...state,password:action.payload.pass};
 	}
+	if(action.type == 'changeConfirmPassword'){
+		return {...state,confirmPassword:action.payload.repass};
+	}
 	if(action.type == 'changeName'){
 		return {...state,name:action.payload.name};
 	}
@@ -29,6 +33,7 @@ const AuthReducer = (state = initialState, action) => {
 	if(action.type == 'changeUid'){
 		return {...state,status:1,uid:action.payload.uid};
 	}
+
 
 
 	return state;

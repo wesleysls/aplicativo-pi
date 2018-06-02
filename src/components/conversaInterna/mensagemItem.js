@@ -5,12 +5,12 @@ export default class MensagemItem extends Component{
 	
     constructor(props){
     	super(props);
-        let bgColor = '#EEEEEE';
+        let bgColor = 'white';
         let align = 'flex-start';
         let textAlign = 'left';
 
         if(this.props.data.uid == this.props.me){
-            bgColor = '#c0ee53';
+            bgColor = '#dcf8c6';
             align = 'flex-end';
             textAlign = 'right';
         }

@@ -10,7 +10,10 @@ import MensagemItem from '../components/conversaInterna/mensagemItem';
 export class PerfilNutricionista extends Component {
 
 	static navigationOptions = ({navigation}) => ({
-	    drawerLabel:'Perfil'
+	    drawerLabel:'Perfil',
+	     headerStyle:{
+            backgroundColor:'#a8119c'
+	    }
 	});
 
 	constructor(props) {
@@ -130,7 +133,6 @@ const styles = StyleSheet.create({
 	
 	container:{
 		flex:1,
-		backgroundColor:'#a8119c',
 	},
     corpo:{
     	marginLeft:10,
@@ -144,6 +146,7 @@ const styles = StyleSheet.create({
     	backgroundColor:'#a8119c',
     	justifyContent:'flex-start',
 		alignItems:'center',
+		borderRadius:5
     },
     foto:{
     	width:100,
@@ -181,7 +184,8 @@ const styles = StyleSheet.create({
 		alignItems:'center'
 	},
 	txtComent:{
-		fontSize:15
+		fontSize:15,
+		fontWeight:'bold'
 	},
 	txtVoto:{
         fontSize:20,

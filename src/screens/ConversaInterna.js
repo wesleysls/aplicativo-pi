@@ -12,6 +12,9 @@ export class ConversaInterna extends Component {
 
 	static navigationOptions = ({navigation})=>({
 	    title:'CONVERSAS',
+	    headerStyle:{
+            backgroundColor:'#a8119c'
+	    },
 	    headerLeft:(
             <TouchableHighlight onPress={()=>{navigation.state.params.voltarFunction()}} underlayColor={false}>
                 <Image source={require('react-navigation/src/views/assets/back-icon.png')} style={{width:25,height:25,marginLeft:20}}/>
@@ -86,15 +89,18 @@ export class ConversaInterna extends Component {
 const styles = StyleSheet.create({
 	container:{
 		flex:1,
+		backgroundColor:'#e5ddd5',
+
 	},
 	sendArea:{
         height:50,
-        backgroundColor:'#EEEEEE',
-        flexDirection:'row'
+        backgroundColor:'white',
+        flexDirection:'row',
+        borderRadius:20
 	},
 	chatArea:{
 		flex:1,
-		backgroundColor:'#a8119c'
+		backgroundColor:'#e5ddd5',
 	},
 	sendInput:{
 		height:50,

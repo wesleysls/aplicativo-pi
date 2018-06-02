@@ -7,7 +7,10 @@ import { connect } from 'react-redux';
 export class MitosInterno extends Component {
 
 	static navigationOptions = ({navigation})=>({
-	    title:'Artigo'
+	    title:'Artigo',
+	     headerStyle:{
+            backgroundColor:'#a8119c'
+	    }
 	})
 
 	constructor(props) {
@@ -33,7 +36,16 @@ export class MitosInterno extends Component {
 		return (
 			<ScrollView>
 			<View style={styles.container}>
-                <Text>{this.state.texto}</Text>
+                <View style={styles.area}>
+                    <View style ={styles.foto}>
+                        <Text>Foto do Artigo</Text>
+                    </View>
+                    <Text style={{fontSize:25}}>{this.state.titulo}</Text>
+                    <Text style={{fontWeight:'bold'}}>Por: {this.state.autor}</Text>
+                </View>
+                <View style={styles.textoArea}>
+                    <Text style={{fontSize:18,textAlign:'left',fontWeight:'100',lineHeight:30}}>{this.state.texto}</Text>
+                </View>
 			</View>
 			</ScrollView>
 		);
@@ -45,8 +57,28 @@ const styles = StyleSheet.create({
 	container:{
 		flex:1,
 		justifyContent:'center',
-		alignItems:'center'
-	}
+		alignItems:'center',
+		backgroundColor:'white'
+	},
+	area:{
+        width:'100%',
+        height:300,
+        justifyContent:'flex-start',
+        alignItems:'center',
+        backgroundColor:'white'
+    },
+    foto:{
+        width:'100%',
+        height:200,
+        backgroundColor:'#DDDDDD',
+        justifyContent:'center',
+        alignItems:'center',
+    },
+    textoArea:{
+    	width:'100%',
+    	paddingLeft:15,
+    	paddingRight:15
+    }
 	
 });
 
