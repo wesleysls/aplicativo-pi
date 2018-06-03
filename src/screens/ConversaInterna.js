@@ -73,8 +73,10 @@ export class ConversaInterna extends Component {
 				    data={this.props.activeChatMessages}
 				    renderItem={({item})=><MensagemItem data={item} me = {this.props.uid}/>}
 				/>
-				<View style={styles.sendArea}>
-				    <TextInput style={styles.sendInput} value={this.state.inputText} onChangeText={(inputText)=>this.setState({inputText})}/>
+				<View style={{justifyContent:'center',flexDirection:'row',width:'100%'}}>
+				    <View style={styles.sendArea}>
+				        <TextInput style={styles.sendInput} value={this.state.inputText} onChangeText={(inputText)=>this.setState({inputText})}/>
+				    </View>
 				    <TouchableHighlight style={styles.sendButton} onPress={this.sendMsg}>
 				        <Image style={styles.sendImage} source={require('../assets/images/send.png')}/>
 				    </TouchableHighlight>
@@ -89,10 +91,11 @@ export class ConversaInterna extends Component {
 const styles = StyleSheet.create({
 	container:{
 		flex:1,
-		backgroundColor:'#e5ddd5',
+		backgroundColor:'#cf88ce',
 
 	},
 	sendArea:{
+		flex:1,
         height:50,
         backgroundColor:'white',
         flexDirection:'row',
@@ -100,7 +103,7 @@ const styles = StyleSheet.create({
 	},
 	chatArea:{
 		flex:1,
-		backgroundColor:'#e5ddd5',
+		backgroundColor:'#cf88ce',
 	},
 	sendInput:{
 		height:50,
@@ -114,7 +117,7 @@ const styles = StyleSheet.create({
 	},
 	sendImage:{
 		width:40,
-		height:40,
+		height:45,
 	}
 });
 

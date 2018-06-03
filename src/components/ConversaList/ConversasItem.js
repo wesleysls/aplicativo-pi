@@ -15,7 +15,14 @@ export default class ConversasItem extends Component{
 	render(){
 		return(
             <TouchableHighlight underlayColor = "#DDDDDD" style = {ConversaItemStyles.buttonArea} onPress = {this.onclick}>
-                <Text style={{fontWeight:'bold',fontSize:15}}>{this.props.data.titulo}</Text>
+                <View style={{flexDirection:'row',width:'100%',alignItems:'center',justifyContent:'flex-start'}}>
+                    <View style={ConversaItemStyles.foto}>
+                        <Text>Foto</Text>
+                    </View>
+                    <View style={{flex:1}}>
+                        <Text style={{fontWeight:'bold',fontSize:15}}>{this.props.data.titulo}</Text>
+                    </View>
+                </View>
             </TouchableHighlight>
 			
 	    );
@@ -27,10 +34,19 @@ const ConversaItemStyles = StyleSheet.create({
         width:350,
     	flex:1,
     	justifyContent:'center',
+        alignItems:'center',
     	padding:10,
         borderBottomWidth:1,
         borderBottomColor:'#CCCCCC',
-    	
+    },
+    foto:{
+        width:50,
+        height:50,
+        borderRadius:25,
+        backgroundColor:'#CCCCCC',
+        marginRight:5,
+        justifyContent:'center',
+        alignItems:'center'
 
     }
 });
