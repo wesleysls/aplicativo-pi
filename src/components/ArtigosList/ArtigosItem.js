@@ -1,13 +1,17 @@
 import React, {Component} from 'react';
-import {View,Text,StyleSheet,TouchableHighlight} from 'react-native';
+import {View,Text,StyleSheet,TouchableHighlight,Image} from 'react-native';
 
 export default class ArtigosItem extends Component{
 	
     constructor(props){
     	super(props);
-        this.state = {};
+        this.state = {
+            foto:null
+        };
 
         this.onclick = this.onclick.bind(this);
+
+        this.state.foto = {uri:this.props.data.foto};
 
     }
 
@@ -20,7 +24,7 @@ export default class ArtigosItem extends Component{
             <TouchableHighlight onPress = {this.onclick}>
 			<View style={ArtigoStyles.area}>
                 <View style ={ArtigoStyles.foto}>
-                    <Text>Foto do Artigo</Text>
+                    <Image source={this.state.foto} style={{width:340,height:200,}}/>
                 </View>
                 <Text style={ArtigoStyles.titulo}>{this.props.data.titulo}</Text>
             </View>

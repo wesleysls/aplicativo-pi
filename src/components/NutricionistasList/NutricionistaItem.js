@@ -1,11 +1,16 @@
 import React, {Component} from 'react';
-import {View,Text,TouchableHighlight,StyleSheet} from 'react-native';
+import {View,Text,TouchableHighlight,StyleSheet,Image} from 'react-native';
 
 export default class NutricionistaItem extends Component{
 	
     constructor(props){
     	super(props);
     	this.onclick = this.onclick.bind(this);
+        this.state ={
+            foto:null
+        }
+
+        this.state.foto ={uri:this.props.data.foto};
     }
 
     onclick(){
@@ -17,7 +22,7 @@ export default class NutricionistaItem extends Component{
             <TouchableHighlight onPress = {this.onclick}>
             <View style = {NutricionistaItensStyles.buttonArea} onPress = {this.onclick}>
                 <View style={NutricionistaItensStyles.foto}>
-                    <Text>Foto</Text>
+                    <Image source={this.state.foto} style={{width:70,height:70,}}/>
                 </View>
                 <View>
                     <Text>{this.props.data.nome}</Text>

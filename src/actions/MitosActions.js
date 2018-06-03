@@ -9,7 +9,8 @@ export const  getMitosList = ()=>{
                          key:childItem.key,
                          titulo:childItem.val().titulo,
                          autor:childItem.val().autor,
-                         texto:childItem.val().texto
+                         texto:childItem.val().texto,
+                         foto:childItem.val().foto
                      });                
              });
 

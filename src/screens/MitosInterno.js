@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet,Button,TouchableHighlight,ScrollView} from 'react-native';
+import { View, Text, StyleSheet,Button,TouchableHighlight,ScrollView,Image} from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import {StackActions} from 'react-navigation';
 import { connect } from 'react-redux';
@@ -20,6 +20,7 @@ export class MitosInterno extends Component {
 			texto:'',
 			autor:'',
 			titulo:'',
+			foto:null
 		};
 
 		this.props.Artigos.forEach((childItem)=>{
@@ -28,6 +29,7 @@ export class MitosInterno extends Component {
                this.state.texto = childItem.texto;
                this.state.autor = childItem.autor;
                this.state.titulo = childItem.titulo;
+               this.state.foto = {uri:childItem.foto};
 			}
 		});
 	}
@@ -38,7 +40,7 @@ export class MitosInterno extends Component {
 			<View style={styles.container}>
                 <View style={styles.area}>
                     <View style ={styles.foto}>
-                        <Text>Foto do Artigo</Text>
+                        <Image source ={this.state.foto} style={{ width:'100%',height:200,}}/>
                     </View>
                     <Text style={{fontSize:25}}>{this.state.titulo}</Text>
                     <Text style={{fontWeight:'bold'}}>Por: {this.state.autor}</Text>

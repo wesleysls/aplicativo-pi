@@ -23,11 +23,11 @@ export default class ConversasItem extends Component{
 }	
 const ConversaItemStyles = StyleSheet.create({
     buttonArea:{
-    	height:60,
+    	minHeight:60,
         width:350,
     	flex:1,
     	justifyContent:'center',
-    	paddingLeft:10,
+    	padding:10,
         borderBottomWidth:1,
         borderBottomColor:'#CCCCCC',
     	

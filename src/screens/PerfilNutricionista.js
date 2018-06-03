@@ -24,7 +24,8 @@ export class PerfilNutricionista extends Component {
 			telefone:'',
 			endereco:'',
 			crn9:'',
-			media:''
+			media:'',
+			foto:null
 		};
 
 		this.props.nutricionistas.forEach((childItem)=>{
@@ -35,6 +36,7 @@ export class PerfilNutricionista extends Component {
                this.state.endereco = childItem.endereco;
                this.state.crn9 = childItem.crn9;
                this.state.media = childItem.media;
+               this.state.foto = {uri:childItem.foto};
 			}
 		});
 		this.votar1 = this.votar1.bind(this);
@@ -82,7 +84,7 @@ export class PerfilNutricionista extends Component {
 			    <View style={styles.corpo}>
 			        <View style={styles.dados}>
 			            <View style={styles.foto}>
-                            <Text>foto do usuário</Text>
+                            <Image source={this.state.foto} style={{width:100,height:100,}}/>
 			            </View>
 			            <View>
 			                <Text>{this.state.nome}</Text>

@@ -11,7 +11,8 @@ export const  getNutricionistasList = ()=>{
                          telefone:childItem.val().telefone,
                          endereco:childItem.val().endereco,
                          crn9:childItem.val().crn9,
-                         media:childItem.val().media
+                         media:childItem.val().media,
+                         foto:childItem.val().foto
                      });                
              });
 
