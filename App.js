@@ -10,6 +10,7 @@ import Preload from './src/screens/Preload';
 import PaginaInicial from './src/screens/PaginaInicial';
 import SignUp from './src/screens/SignUp';
 import SignIn from './src/screens/SignIn';
+import ForgotPassword from './src/screens/ForgotPassword';
 
 console.disableYellowBox = true;
 
@@ -33,6 +34,10 @@ const Navegador = StackNavigator({
 
   SignUp:{
     screen:SignUp
+  },
+
+  ForgotPassword:{
+     screen:ForgotPassword
   },
   
 });

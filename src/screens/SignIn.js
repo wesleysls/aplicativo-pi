@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet,Button,TextInput,Keyboard } from 'react-native';
+import { View, Text, StyleSheet,Button,TextInput,Keyboard,TouchableHighlight} from 'react-native';
 import { connect } from 'react-redux';
 import { checkLogin,changeEmail,changePassword,SignInAction} from '../actions/AuthActions';
 
@@ -16,6 +16,7 @@ export class SignIn extends Component {
 		};
 		
 		this.signupButton = this.signupButton.bind(this);
+		this.forgotPassword = this.forgotPassword.bind(this);
 	}
     
     componentDidUpdate(){
@@ -28,6 +29,10 @@ export class SignIn extends Component {
          this.props.navigation.navigate('SignUp');
 	}
 
+	forgotPassword(){
+         this.props.navigation.navigate('ForgotPassword');
+	}
+
 	render() {
 		return (
 			<View style={styles.container}>
@@ -35,12 +40,22 @@ export class SignIn extends Component {
 				<TextInput style={styles.input} onChangeText={this.props.changeEmail}/>
 				<Text style = {styles.texto}>Digite sua senha:</Text>
 				<TextInput secureTextEntry = {true} style={styles.input} onChangeText={this.props.changePassword}/>
-			    <Button title="Entrar" onPress={()=>{
-			    	this.props.SignInAction(this.props.email, this.props.password);
-			    }}/>
-			    <View style={styles.button}>
-			        <Button  onPress={this.signupButton} title ="cadastre-se"/>
+			    <View style={{flexDirection:'row',alignItems:'center'}}>
+			        <TouchableHighlight style={styles.button}  onPress={this.signupButton}>
+			            <Text style={styles.texto}>Cadastre-se</Text>
+			        </TouchableHighlight>
+
+			        <TouchableHighlight style={styles.button} onPress={this.forgotPassword}>
+			            <Text style ={{color:'rgba(130,14,25,1)7'}}>Esqueci a senha</Text>
+			        </TouchableHighlight>
 			    </View>
+			    <View style={{marginTop:10}}>
+			        <Button title="Entrar" onPress={()=>{
+			    	    this.props.SignInAction(this.props.email, this.props.password);
+			        }}/>
+			    </View>
+			    
+
 
 			</View>
 		);

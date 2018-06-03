@@ -11,37 +11,13 @@ export const SignOut = () =>{
     };
 };
 
-export const getDados = (uid) =>{
-    return(dispatch)=> {
-      firebase.database().ref('usuarios').child(uid).on('value',(snapshot)=>{
-           let nome = snapshot.val().name;
-           let sobreNome = snapshot.val().sobreNome;
-           let estado = snapshot.val().estado;
-           let idade = snapshot.val().idade;
-           let cidade = snapshot.val().cidade;
-           let estadoCivil = snapshot.val().estadoCivil;
-           let sexo = snapshot.val().sexo;
-           
-           let dados = [];
-
-           dados.push({
-               nome:nome,
-               sobreNome:sobreNome,
-               estado:estado,
-               cidade:cidade,
-               idade:idade,
-               sexo:sexo,
-               estadoCivil:estadoCivil
-           });
-
-           dispatch({
-               type:'changeDados',
-               payload:{
-                dados:dados
-               }
-           });
-
-       });
+export const forgotPassword = (email)=>{
+    return(dispatch)=>{
+        firebase.auth().sendPasswordResetEmail(email).then(function(user){
+            alert("E-mail de recuperação de senha enviado!");
+        }).catch(function(e){
+            alert(e);
+        })
     };
 };
 
