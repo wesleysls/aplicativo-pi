@@ -11,7 +11,7 @@ import MensagemItem from '../components/conversaInterna/mensagemItem';
 export class ConversaInterna extends Component {
 
 	static navigationOptions = ({navigation})=>({
-	    title:'CONVERSAS',
+	    title:'Chat',
 	    headerStyle:{
             backgroundColor:'#a8119c'
 	    },
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
 	},
 	sendInput:{
 		height:50,
-		flex:1
+		flex:1,
 	},
 	sendButton:{
 		width:50,

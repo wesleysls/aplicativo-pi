@@ -5,10 +5,8 @@ import Nutricionistas from './Nutricionistas';
 import MitosVerdades from './MitosVerdades';
 import Perfil from './Perfil';
 import ConversasStack from './ConversasStack';
+import FaleConosco from './FaleConosco';
 
-//static navigationOptions = ({navigation}) => ({
-    //    header:null;
-   // });
 
 const Navegador = DrawerNavigator({
 	Perfil:{
@@ -28,6 +26,9 @@ const Navegador = DrawerNavigator({
         navigationOptions:{
             drawerLabel:'Conversas'
         }
+    },
+    FaleConosco:{
+        screen:FaleConosco
     }
   
 });

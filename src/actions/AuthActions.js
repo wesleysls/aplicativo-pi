@@ -101,6 +101,58 @@ export const SignUpAction =(name,sobreNome,email,password,estado,cidade,sexo,ida
     }
 };
 
+export const faleConosco = (txt,author,name) => {
+    return(dispatch) => {
+       let currentDate ='';
+       let cDate = new Date();
+
+       currentDate = cDate.getFullYear();
+       currentDate+='-';
+
+       if((cDate.getMonth()+1)< 10){
+            currentDate+= "0"+ (cDate.getMonth()+1);
+       }else{
+            currentDate+= (cDate.getMonth()+1);
+       }
+       currentDate+='-';
+
+       if((cDate.getDate())< 10){
+            currentDate+= "0"+ cDate.getDate();
+       }else{
+            currentDate+= cDate.getDate();
+       }
+       currentDate+=' ';
+       
+       if((cDate.getHours())< 10){
+            currentDate+= "0"+ cDate.getHours();
+       }else{
+            currentDate+= cDate.getHours();
+       }
+        currentDate+=':';
+
+       if((cDate.getMinutes())< 10){
+            currentDate+= "0"+ cDate.getMinutes();
+       }else{
+            currentDate+= cDate.getMinutes();
+       }
+        currentDate+=':';
+
+       if((cDate.getSeconds())< 10){
+            currentDate+= "0"+ cDate.getSeconds();
+       }else{
+            currentDate+= cDate.getSeconds();
+       }
+       
+       let msgId = firebase.database().ref('faleConosco').child('mensagens').push();
+       msgId.set({
+          data:currentDate,
+          msg:txt,
+          uid:author,
+          name:name
+       });
+    };
+};
+
 export const SignInAction = (email,password)=>{
 	return(dispatch) =>{
         firebase.auth().signInWithEmailAndPassword(email,password)

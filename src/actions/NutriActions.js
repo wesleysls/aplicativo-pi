@@ -74,7 +74,7 @@ export const votar = (voto,nutricionista) =>{
 
             let media = (soma/notas.length);
             firebase.database().ref('nutricionistas').child(nutricionista).child('media').set(media.toFixed(2));
-            alert("Voto compultado com sucesso!");
+            alert("Voto computado com sucesso!");
         });
     }
 }

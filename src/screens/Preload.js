@@ -61,7 +61,7 @@ export class Preload extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<Text>Carregando...</Text>
+				<Text style={{fontSize:20,color:'white',fontWeight:'bold'}}>Carregando...</Text>
 			</View>
 		);
 	}
@@ -70,7 +70,6 @@ export class Preload extends Component {
 
 const styles = StyleSheet.create({
 	container:{
-		margin:10,
 		backgroundColor:'#a8119c',
 		flex:1,
 		justifyContent:'center',
