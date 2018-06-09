@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList,StyleSheet,Button,TouchableHighlight,TextInput,Image} from 'react-native';
+import { View, Text, FlatList,StyleSheet,Button,TouchableHighlight,TextInput,Image,ScrollView} from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import {StackActions} from 'react-navigation';
 import { connect } from 'react-redux';
 import {votar,sendComent,monitorComent,monitorComentOff} from '../actions/NutriActions';
 import firebase from '../firebaseConnection';
-import MensagemItem from '../components/conversaInterna/mensagemItem';	
+import ComentarioItem from '../components/Comentarios/ComentarioItem';	
 
 export class PerfilNutricionista extends Component {
 
@@ -80,6 +80,7 @@ export class PerfilNutricionista extends Component {
 
 	render() {
 		return (
+			<ScrollView>
 			<View style={styles.container}>
 			    <View style={styles.corpo}>
 			        <View style={styles.dados}>
@@ -116,16 +117,17 @@ export class PerfilNutricionista extends Component {
 			    <View style = {styles.inf}>
 			        <Text style={styles.txtComent}>Adicione um comentario!</Text>
 			        <View style={styles.addArea}>
-				        <TextInput style={styles.input} value={this.state.inputText} onChangeText={(inputText)=>this.setState({inputText})}/>	
+				        <TextInput style={styles.input} value={this.state.inputText} underlineColorAndroid={'transparent'} placeholder={'Digite aqui...'} multiline={true} onChangeText={(inputText)=>this.setState({inputText})}/>	
 				        <TouchableHighlight style={styles.sendButton} onPress={this.sendMsg}>
 			                <Image style={styles.addImage} source={require('../assets/images/add.png')}/>
 				        </TouchableHighlight>  	
 				    </View>	
 			    </View>
 			    <FlatList style={styles.chatArea} data={this.props.coments}
-				    renderItem={({item})=><MensagemItem data={item} me = 'ninguem'/>}
+				    renderItem={({item})=><ComentarioItem data={item} me = 'ninguem'/>}
 				/>
 			</View>
+			</ScrollView>
 		);
 	}
 
@@ -141,14 +143,11 @@ const styles = StyleSheet.create({
     	height:220,
     	justifyContent:'center',
     	alignItems:'flex-start',
-    	borderBottomWidth:2,
-    	borderBottomColor:'white'
     },
     inf:{
     	backgroundColor:'#a8119c',
     	justifyContent:'flex-start',
 		alignItems:'center',
-		borderRadius:5
     },
     foto:{
     	width:100,
@@ -160,8 +159,9 @@ const styles = StyleSheet.create({
     },
     input:{
 		width:260,
-		height:50,
-		fontSize:20,
+		minHeight:50,
+		maxHeight:160,
+		fontSize:17,
 		backgroundColor:'#DDDDDD',
 		margin:10,
 		borderRadius:5

@@ -36,6 +36,7 @@ const ConversaItemStyles = StyleSheet.create({
     	justifyContent:'center',
         alignItems:'center',
     	padding:10,
+        paddingLeft:5,
         borderBottomWidth:1,
         borderBottomColor:'#CCCCCC',
     },

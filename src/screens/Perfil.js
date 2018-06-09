@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList,StyleSheet,Button,TouchableHighlight,TextInput,Image} from 'react-native';
+import { View, Text, FlatList,StyleSheet,Button,TouchableHighlight,TextInput,Image,ScrollView} from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import {StackActions,DrawerActions} from 'react-navigation';
 import { connect } from 'react-redux';
@@ -77,6 +77,7 @@ export class Perfil extends Component {
 			            <Image style={{width:40,height:40}} source={require('../assets/images/logout.png')}/>
 			        </TouchableHighlight>
 			    </View>
+			    <ScrollView>
 			    <View style={styles.corpo}>
 			        <View style={styles.foto}>
                         <Text>foto do usuário</Text>
@@ -93,7 +94,7 @@ export class Perfil extends Component {
 			    <View style = {styles.inf}>
 			        <Text style={{fontSize:20,marginBottom:5}}>Adicione uma conversa</Text>
 			        <View style={styles.addArea}>
-				         <TextInput style={styles.input} value={this.state.inputText} onChangeText={(inputText)=>this.setState({inputText})}/>	
+				         <TextInput style={styles.input} value={this.state.inputText} underlineColorAndroid={'transparent'} placeholder={'Digite aqui...'} multiline={true}underlineColorAndroid={'transparent'} placeholder={'Digite aqui...'} multiline={true} onChangeText={(inputText)=>this.setState({inputText})}/>	
 				         <TouchableHighlight style={styles.sendButton} onPress={this.adicionarConversa}>
 			                <Image style={styles.addImage} source={require('../assets/images/add.png')}/>
 				        </TouchableHighlight>  	
@@ -107,6 +108,7 @@ export class Perfil extends Component {
                     renderItem={({item})=><ConversasItem data={item} onPress={this.conversaClick}/>}		
 
 			    />
+			</ScrollView>
 			</View>
 		);
 	}
@@ -131,14 +133,11 @@ const styles = StyleSheet.create({
         width:60
 	},
     corpo:{
-    	flex:1,
+        height:220,
     	justifyContent:'center',
     	alignItems:'center',
-    	borderBottomWidth:2,
-    	borderBottomColor:'white'
     },
     inf:{
-    	borderRadius:5,
     	backgroundColor:'#a8119c',
     	justifyContent:'center',
 		alignItems:'center',
@@ -152,7 +151,8 @@ const styles = StyleSheet.create({
     },
     input:{
 		width:260,
-		height:50,
+		minHeight:50,
+		maxHeight:160,
 		fontSize:20,
 		backgroundColor:'#DDDDDD',
 		margin:10,

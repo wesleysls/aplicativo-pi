@@ -45,9 +45,9 @@ export class FaleConosco extends Component {
 			        </TouchableHighlight>
 			    </View>
 			    <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
-			        <View style={{width:300,height:300,backgroundColor:'#a8119c',justifyContent:'center',alignItems:'center',borderRadius:10}}>
+			        <View style={{width:300,minHeight:250,backgroundColor:'#a8119c',justifyContent:'center',alignItems:'center',borderRadius:10,padding:10}}>
 				        <Text style = {styles.texto}>Em que podemos te ajudar?</Text>
-				        <TextInput style={styles.input} value={this.state.inputText} onChangeText={(inputText)=>this.setState({inputText})}/>
+				        <TextInput  multiline={true} underlineColorAndroid={'transparent'} placeholder={'Digite aqui...'} style={styles.input} value={this.state.inputText} onChangeText={(inputText)=>this.setState({inputText})}/>
 			            <Button title="enviar" onPress={this.sendMsg}/>
 			        </View>
 			    </View>
@@ -65,11 +65,12 @@ const styles = StyleSheet.create({
 	},
 	input:{
 		width:'80%',
-		height:100,
+		minHeight:50,
+		maxHeight:160,
 		fontSize:20,
 		backgroundColor:'#DDDDDD',
 		margin:20,
-		borderRadius:10
+		borderRadius:10,
 	},
 	texto:{
 		color:'white',
