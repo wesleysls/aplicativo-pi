@@ -263,7 +263,7 @@ export class SignUp extends Component {
 
 				     <View style = {styles.picker}>
                         <Text style={styles.texto}>Idade: </Text>
-				        <Picker selectedValue={this.state.idade} onValueChange={(itemValue,itemIndex)=> this.setState({idade:itemValue})} style={{width:214}}>
+				        <Picker selectedValue={this.state.idade} onValueChange={(itemValue,itemIndex)=> this.setState({idade:itemValue})} style={{width:213}}>
 				            {idadeItems}
 				        </Picker>
 				    </View>

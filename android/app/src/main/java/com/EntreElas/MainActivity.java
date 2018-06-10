@@ -1,4 +1,4 @@
-package com.aplicativopi;
+package com.EntreElas;
 
 import com.facebook.react.ReactActivity;
 
