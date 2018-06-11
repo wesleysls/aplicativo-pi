@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet,Button,TextInput,Keyboard,ScrollView,Picker} from 'react-native';
+import { View, Text, StyleSheet,Button,TextInput,Keyboard,ScrollView,Picker,TouchableHighlight,Image} from 'react-native';
 import { connect } from 'react-redux';
-import { checkLogin,changeEmail,changePassword,changeConfirmPassword,changeName,changeSobreNome,SignUpAction} from '../actions/AuthActions';
+import {changeName,changeSobreNome,EditarNome,EditarSobreNome,EditarEstado,EditarCidade,EditarSexo,EditarEstadoCivil,EditarIdade} from '../actions/AuthActions';
 import { estados } from '../cidades-estados.json'
 import SelectEstados from '../components/SelectEstados'
 import SelectCidades from '../components/SelectCidades'
 
 
-export class SignUp extends Component {
+export class EditarPerfil extends Component {
 
 	static navigationOptions = {
-		title:'Cadastrar',
+		title:'Editar Dados',
+		headerStyle:{
+            backgroundColor:'#a8119c'
+	    }
 	}
 
 	constructor(props) {
@@ -145,7 +148,13 @@ export class SignUp extends Component {
 			confirmPassword:''
 		};
 
-		this.changeSelects = this.changeSelects.bind(this);
+		this.editarNome = this.editarNome.bind(this);
+		this.editarSobreNome = this.editarSobreNome.bind(this);
+		this.editarEstado = this.editarEstado.bind(this);
+		this.editarCidade = this.editarCidade.bind(this);
+		this.editarSexo = this.editarSexo.bind(this);
+		this.editarIdade = this.editarIdade.bind(this);
+		this.editarEstadoCivil = this.editarEstadoCivil.bind(this);
 	}
 
 	componentDidUpdate(){
@@ -203,6 +212,35 @@ export class SignUp extends Component {
         })
       }
 
+      editarNome(){
+      	this.props.EditarNome(this.props.uid,this.props.name);
+      	alert("Nome editado para "+this.props.name);
+      }
+      editarSobreNome(){
+      	this.props.EditarSobreNome(this.props.uid,this.props.sobreNome);
+      	alert("Sobrenome editado para "+this.props.sobreNome);
+      }
+      editarEstado(){
+      	this.props.EditarEstado(this.props.uid,this.state.estado);
+      	alert("Estado editado para "+this.state.estado);
+      }
+      editarCidade(){
+      	this.props.EditarCidade(this.props.uid,this.state.cidade);
+      	alert("Cidade editado para "+this.state.cidade);
+      }
+      editarSexo(){
+      	this.props.EditarSexo(this.props.uid,this.state.sexos[this.state.sexo].nome);
+      	alert("Sexo editado para "+this.state.sexos[this.state.sexo].nome);
+      }
+      editarIdade(){
+      	this.props.EditarIdade(this.props.uid,this.state.idades[this.state.idade].idade);
+      	alert("Idade editada para "+this.state.idades[this.state.idade].idade);
+      }
+      editarEstadoCivil(){
+      	this.props.EditarEstadoCivil(this.props.uid,this.state.estadosCivis[this.state.estadoCivil].nome);
+      	alert("EstadoCivil editado para "+this.state.estadosCivis[this.state.estadoCivil].nome);
+      }
+
 	render() {
         const { selectedValueCidade, selectedValueEstado, uf } = this.state;
 
@@ -223,21 +261,21 @@ export class SignUp extends Component {
 		return (
 			<ScrollView>
 			    <View style={styles.container}>
-			        <Text style = {styles.texto}>Digite seu nome:</Text>
-				    <TextInput style={styles.input} onChangeText={this.props.changeName}/>
+			        <Text style = {styles.texto}>Editar nome:</Text>
+			        <View style={{flexDirection:'row',alignItems:'center'}}>
+				        <TextInput style={styles.input} onChangeText={this.props.changeName}/>
+				        <TouchableHighlight onPress={this.editarNome}>
+                            <Image style={{width:30,height:30}} source={require('../assets/images/edit.png')}/>
+			            </TouchableHighlight>
+				    </View>
 
-				    <Text style = {styles.texto}>Digite seu sobrenome:</Text>
-				    <TextInput style={styles.input} onChangeText={this.props.changeSobreNome}/>
-
-				    <Text style = {styles.texto}>Digite seu e-mail:</Text>
-			    	<TextInput style={styles.input} onChangeText={this.props.changeEmail}/>
-
-			    	<Text style = {styles.texto}>Digite sua senha:</Text>
-				    <TextInput secureTextEntry = {true} style={styles.input} onChangeText={this.props.changePassword}/>
-
-				    <Text style = {styles.texto}>Digite sua senha novamente:</Text>
-				    <TextInput secureTextEntry = {true} style={styles.input} onChangeText={this.props.changeConfirmPassword}/>
-                    
+				    <Text style = {styles.texto}>Editar sobrenome:</Text>
+				    <View style={{flexDirection:'row',alignItems:'center'}}>
+				        <TextInput style={styles.input} onChangeText={this.props.changeSobreNome}/>
+				        <TouchableHighlight onPress={this.editarSobreNome}>
+                            <Image style={{width:30,height:30}} source={require('../assets/images/edit.png')}/>
+			            </TouchableHighlight>
+			        </View>
                     
                     <View style = {styles.picker}>
                         <Text style={styles.texto}>Estado: </Text>
@@ -245,6 +283,9 @@ export class SignUp extends Component {
                             selectedValue={selectedValueEstado}
                             data={uf}
                             onValueChange={this.renderValueChangeEstado} />
+                            <TouchableHighlight onPress={this.editarEstado}style={{marginLeft:15}}>
+                                <Image style={{width:30,height:30}} source={require('../assets/images/edit.png')}/>
+			                </TouchableHighlight>
                     </View>
 
                     <View style = {styles.picker}>
@@ -252,6 +293,9 @@ export class SignUp extends Component {
                         <SelectCidades selectedValue={selectedValueCidade}
                             data={selectedValueEstado}
                             onValueChange={this.renderValueChangeCidade} />
+                            <TouchableHighlight onPress={this.editarCidade}style={{marginLeft:15}}>
+                                <Image style={{width:30,height:30}} source={require('../assets/images/edit.png')}/>
+			                </TouchableHighlight>
                     </View>
 
 				    <View style = {styles.picker}>
@@ -259,6 +303,9 @@ export class SignUp extends Component {
 				        <Picker selectedValue={this.state.sexo} onValueChange={(itemValue,itemIndex)=> this.setState({sexo:itemValue})} style={{width:158}}>
 				            {sexosItems}
 				        </Picker>
+				        <TouchableHighlight onPress={this.editarSexo}style={{marginLeft:15}}>
+                            <Image style={{width:30,height:30}} source={require('../assets/images/edit.png')}/>
+			            </TouchableHighlight>
 				    </View>
 
 				     <View style = {styles.picker}>
@@ -266,6 +313,9 @@ export class SignUp extends Component {
 				        <Picker selectedValue={this.state.idade} onValueChange={(itemValue,itemIndex)=> this.setState({idade:itemValue})} style={{width:153}}>
 				            {idadeItems}
 				        </Picker>
+				        <TouchableHighlight onPress={this.editarIdade}style={{marginLeft:15}}>
+                            <Image style={{width:30,height:30}} source={require('../assets/images/edit.png')}/>
+			            </TouchableHighlight>
 				    </View>
 
 				    <View style = {styles.picker}>
@@ -273,11 +323,10 @@ export class SignUp extends Component {
 				        <Picker selectedValue={this.state.estadoCivil} onValueChange={(itemValue,itemIndex)=> this.setState({estadoCivil:itemValue})} style={{width:100}}>
 				            {estadosCivisItems}
 				        </Picker>
+				        <TouchableHighlight onPress={this.editarEstadoCivil}style={{marginLeft:15}}>
+                            <Image style={{width:30,height:30}} source={require('../assets/images/edit.png')}/>
+			            </TouchableHighlight>
 				    </View>
-
-				    <View style={{marginTop:20,marginBottom:20}}>
-			            <Button title="Cadastrar" onPress={this.changeSelects}/>
-			        </View>
 			    </View>
 			</ScrollView>
 		);
@@ -287,13 +336,14 @@ export class SignUp extends Component {
 
 const styles = StyleSheet.create({
 	container:{
+		paddingLeft:10,
 		flex:1,
-		justifyContent:'center',
-		alignItems:'center',
+		justifyContent:'flex-start',
+		alignItems:'flex-start',
 		marginTop:15
 	},
 	input:{
-		width:'80%',
+		width:'70%',
 		height:50,
 		fontSize:20,
 		backgroundColor:'#DDDDDD',
@@ -306,7 +356,7 @@ const styles = StyleSheet.create({
 	},
 	picker:{
 		flexDirection:'row',
-		justifyContent:'center',
+		justifyContent:'flex-start',
 		alignItems:'center',
 		marginTop:10,
 		marginBottom:10
@@ -315,17 +365,14 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
 	return {
-		status:state.auth.status,
 		name:state.auth.name,
-		email:state.auth.email,
-		password:state.auth.password,
 		sobreNome:state.auth.sobreNome,
-		confirmPassword:state.auth.confirmPassword
+		uid:state.auth.uid
 	};
 };
 
-const SignUpConnect = connect(mapStateToProps, { checkLogin,changeEmail,changePassword,changeConfirmPassword,changeName,changeSobreNome,SignUpAction })(SignUp);
-export default SignUpConnect;
+const EditarPerfilConnect = connect(mapStateToProps, {changeName,changeSobreNome,EditarNome,EditarSobreNome,EditarEstado,EditarCidade,EditarSexo,EditarEstadoCivil,EditarIdade})(EditarPerfil);
+export default EditarPerfilConnect;
 
 
 

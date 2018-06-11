@@ -3,14 +3,17 @@ import { DrawerNavigator } from 'react-navigation';
 
 import Nutricionistas from './Nutricionistas';
 import MitosVerdades from './MitosVerdades';
-import Perfil from './Perfil';
+import PerfilStack from './perfilStack';
 import ConversasStack from './ConversasStack';
 import FaleConosco from './FaleConosco';
 
 
 const Navegador = DrawerNavigator({
-	Perfil:{
-		screen:Perfil
+	PerfilStack:{
+		screen:PerfilStack,
+        navigationOptions:{
+            drawerLabel:'Perfil'
+        }
 	},
     Nutricionistas:{
         	screen:Nutricionistas,

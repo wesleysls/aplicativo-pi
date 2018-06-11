@@ -31,7 +31,7 @@ export default class ConversasItem extends Component{
 const ConversaItemStyles = StyleSheet.create({
     buttonArea:{
     	minHeight:60,
-        width:350,
+        width:'95%',
     	flex:1,
     	justifyContent:'center',
         alignItems:'center',

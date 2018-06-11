@@ -50,6 +50,48 @@ export const checkLogin = () => {
 
 };
 
+export const EditarNome =(uid,name)=>{
+    return(dispatch)=>{
+        firebase.database().ref('usuarios').child(uid).child('name').set(name);
+    }
+};
+
+export const EditarSobreNome =(uid,sobreNome)=>{
+    return(dispatch)=>{
+        firebase.database().ref('usuarios').child(uid).child('sobreNome').set(sobreNome);
+    }
+};
+
+export const EditarEstado =(uid,estado)=>{
+    return(dispatch)=>{
+        firebase.database().ref('usuarios').child(uid).child('estado').set(estado);
+    }
+};
+
+export const EditarCidade =(uid,cidade)=>{
+    return(dispatch)=>{
+        firebase.database().ref('usuarios').child(uid).child('cidade').set(cidade);
+    }
+};
+
+export const EditarSexo =(uid,sexo)=>{
+    return(dispatch)=>{
+        firebase.database().ref('usuarios').child(uid).child('sexo').set(sexo);
+    }
+};
+
+export const EditarIdade =(uid,idade)=>{
+    return(dispatch)=>{
+        firebase.database().ref('usuarios').child(uid).child('idade').set(idade);
+    }
+};
+
+export const EditarEstadoCivil =(uid,estadoCivil)=>{
+    return(dispatch)=>{
+        firebase.database().ref('usuarios').child(uid).child('estadoCivil').set(estadoCivil);
+    }
+};
+
 export const SignUpAction =(name,sobreNome,email,password,estado,cidade,sexo,idade,estadoCivil)=> {
     return(dispatch)=>{
     	firebase.auth().createUserWithEmailAndPassword(email,password)
@@ -63,7 +105,8 @@ export const SignUpAction =(name,sobreNome,email,password,estado,cidade,sexo,ida
                 cidade:cidade,
                 sexo:sexo,
                 idade:idade,
-                estadoCivil:estadoCivil
+                estadoCivil:estadoCivil,
+                foto:'https://firebasestorage.googleapis.com/v0/b/apliativofaculdade.appspot.com/o/usuarioDefaut%2Fusuario.png?alt=media&token=7ee16b94-e08a-4863-9c71-f1df84bcb372'
              });
 
              firebase.database().ref('chats').once('value').then((snapshot)=>{

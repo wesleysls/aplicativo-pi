@@ -13,7 +13,8 @@ import firebase from '../firebaseConnection';
 export class Perfil extends Component {
 
 	static navigationOptions = ({navigation}) => ({
-	    drawerLabel:'Perfil'
+	    drawerLabel:'Perfil',
+	     header:null
 	});
 
 	constructor(props) {
@@ -22,14 +23,17 @@ export class Perfil extends Component {
 			inputText:'',
 			nome:'',
 			cidade:'',
-			estadoCivil:''
+			estadoCivil:'',
+			foto:null
 		};
+
 
 		let tela = 2;
         this.sair = this.sair.bind(this);
         this.props.getChatList(this.props.uid,tela);
         this.conversaClick = this.conversaClick.bind(this);
         this.adicionarConversa = this.adicionarConversa.bind(this);
+        this.editar = this.editar.bind(this);
 	}
 
 	sair(){
@@ -42,11 +46,13 @@ export class Perfil extends Component {
            let nome = snapshot.val().name;
            let cidade = snapshot.val().cidade;
            let estadoCivil = snapshot.val().estadoCivil;
+           let foto = snapshot.val().foto;
 
            this.setState({
            	nome:nome,
            	cidade:cidade,
-           	estadoCivil:estadoCivil
+           	estadoCivil:estadoCivil,
+           	foto:{uri:foto}
            });
         });
 	 }
@@ -65,6 +71,9 @@ export class Perfil extends Component {
 
         this.props.createChat(this.props.uid,titulo);
 	}
+	editar(){
+        this.props.navigation.navigate('EditarPerfil');
+	}
 
 	render() {
 		return (
@@ -80,7 +89,10 @@ export class Perfil extends Component {
 			    <ScrollView>
 			    <View style={styles.corpo}>
 			        <View style={styles.foto}>
-                        <Text>foto do usuário</Text>
+                        <Image style={{width:120,height:120}} source={this.state.foto}/>
+                        <TouchableHighlight onPress={this.editar}>
+                            <Image style={{width:30,height:30}} source={require('../assets/images/edit.png')}/>
+			            </TouchableHighlight>
 			        </View>
 			        <View>
 			            <Text style={{fontWeight:'bold',fontSize:20}}>{this.state.nome}</Text>
@@ -143,11 +155,11 @@ const styles = StyleSheet.create({
 		alignItems:'center',
     },
     foto:{
-    	width:120,
+    	width:180,
     	height:120,
-    	backgroundColor:'#cfd8dc',
-    	justifyContent:'center',
-		alignItems:'center',
+    	justifyContent:'flex-end',
+		alignItems:'flex-end',
+		flexDirection:'row'
     },
     input:{
 		width:260,
