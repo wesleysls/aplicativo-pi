@@ -104,16 +104,15 @@ export class Perfil extends Component {
 			        </View>
 			    </View>  
 			    <View style = {styles.inf}>
-			        <Text style={{fontSize:20,marginBottom:5}}>Adicione uma conversa</Text>
 			        <View style={styles.addArea}>
-				         <TextInput style={styles.input} value={this.state.inputText} underlineColorAndroid={'transparent'} placeholder={'Digite aqui...'} multiline={true}underlineColorAndroid={'transparent'} placeholder={'Digite aqui...'} multiline={true} onChangeText={(inputText)=>this.setState({inputText})}/>	
+				         <TextInput style={styles.input} value={this.state.inputText} underlineColorAndroid={'transparent'} placeholder={'Adicione uma conversa!'} multiline={true}underlineColorAndroid={'transparent'} placeholder={'Adicione uma conversa...'} multiline={true} onChangeText={(inputText)=>this.setState({inputText})}/>	
 				         <TouchableHighlight style={styles.sendButton} onPress={this.adicionarConversa}>
 			                <Image style={styles.addImage} source={require('../assets/images/add.png')}/>
 				        </TouchableHighlight>  	
 				    </View>	
 			    </View>
-			    <View style={{width:'100%',borderBottomWidth:1,borderBottomColor:'#CCCCCC'}}>
-			        <Text style={{fontSize:20,marginBottom:10,fontWeight:'bold'}}>Minhas Conversas:</Text>
+			    <View style={{width:'100%',borderBottomWidth:1,borderBottomColor:'#CCCCCC',backgroundColor:'#a8119c',color:'white'}}>
+			        <Text style={{fontSize:20,marginBottom:10,fontWeight:'bold',color:'white',paddingLeft:5}}>Minhas Conversas:</Text>
 			    </View>
 			    <FlatList
                     data={this.props.chats}
@@ -162,22 +161,28 @@ const styles = StyleSheet.create({
 		flexDirection:'row'
     },
     input:{
-		width:260,
+		width:295,
 		minHeight:50,
 		maxHeight:160,
 		fontSize:20,
-		backgroundColor:'#DDDDDD',
+		backgroundColor:'#eeeeee',
 		margin:10,
-		borderRadius:5
+		marginRight:3,
+		marginLeft:5,
+		borderRadius:5,
+		paddingLeft:10
 	},
 	addImage:{
 		width:52,
 		height:52,
 	},
 	addArea:{
+		width:'100%',
     	flexDirection:'row',
     	justifyContent:'center',
     	alignItems:'center',
+    	borderBottomWidth:1,
+    	borderBottomColor:'white'
 	},
 	sendButton:{
 		width:52,

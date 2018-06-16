@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
 		backgroundColor:'#DDDDDD',
 		margin:20,
 		borderRadius:10,
+		paddingLeft:10
 	},
 	texto:{
 		color:'white',

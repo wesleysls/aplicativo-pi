@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View,Text,TouchableHighlight,StyleSheet} from 'react-native';
+import {View,Text,TouchableHighlight,StyleSheet,Image} from 'react-native';
 
 export default class ConversasItem extends Component{
 	
@@ -17,7 +17,7 @@ export default class ConversasItem extends Component{
             <TouchableHighlight underlayColor = "#DDDDDD" style = {ConversaItemStyles.buttonArea} onPress = {this.onclick}>
                 <View style={{flexDirection:'row',width:'100%',alignItems:'center',justifyContent:'flex-start'}}>
                     <View style={ConversaItemStyles.foto}>
-                        <Text>Foto</Text>
+                        <Image style={{width:50,height:50}} source={require('./group.png')}/>
                     </View>
                     <View style={{flex:1}}>
                         <Text style={{fontWeight:'bold',fontSize:15}}>{this.props.data.titulo}</Text>
@@ -43,9 +43,7 @@ const ConversaItemStyles = StyleSheet.create({
     foto:{
         width:50,
         height:50,
-        borderRadius:25,
-        backgroundColor:'#CCCCCC',
-        marginRight:5,
+        marginRight:10,
         justifyContent:'center',
         alignItems:'center'
 

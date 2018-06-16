@@ -262,7 +262,7 @@ export class EditarPerfil extends Component {
 			<ScrollView>
 			    <View style={styles.container}>
 			        <Text style = {styles.texto}>Editar nome:</Text>
-			        <View style={{flexDirection:'row',alignItems:'center'}}>
+			        <View style={{flexDirection:'row',alignItems:'center',width:'100%',borderBottomWidth:1,borderBottomColor:'#cccccc'}}>
 				        <TextInput style={styles.input} onChangeText={this.props.changeName}/>
 				        <TouchableHighlight onPress={this.editarNome}>
                             <Image style={{width:30,height:30}} source={require('../assets/images/edit.png')}/>
@@ -270,7 +270,7 @@ export class EditarPerfil extends Component {
 				    </View>
 
 				    <Text style = {styles.texto}>Editar sobrenome:</Text>
-				    <View style={{flexDirection:'row',alignItems:'center'}}>
+				    <View style={{flexDirection:'row',alignItems:'center',width:'100%',borderBottomWidth:1,borderBottomColor:'#cccccc'}}>
 				        <TextInput style={styles.input} onChangeText={this.props.changeSobreNome}/>
 				        <TouchableHighlight onPress={this.editarSobreNome}>
                             <Image style={{width:30,height:30}} source={require('../assets/images/edit.png')}/>
@@ -359,7 +359,10 @@ const styles = StyleSheet.create({
 		justifyContent:'flex-start',
 		alignItems:'center',
 		marginTop:10,
-		marginBottom:10
+		marginBottom:10,
+		width:'100%',
+		borderBottomWidth:1,
+		borderBottomColor:'#cccccc'
 	}
 });
 

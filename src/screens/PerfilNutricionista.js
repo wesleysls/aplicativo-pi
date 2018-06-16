@@ -115,9 +115,8 @@ export class PerfilNutricionista extends Component {
 			        </View>   
 			    </View>  
 			    <View style = {styles.inf}>
-			        <Text style={styles.txtComent}>Adicione um comentario!</Text>
 			        <View style={styles.addArea}>
-				        <TextInput style={styles.input} value={this.state.inputText} underlineColorAndroid={'transparent'} placeholder={'Digite aqui...'} multiline={true} onChangeText={(inputText)=>this.setState({inputText})}/>	
+				        <TextInput style={styles.input} value={this.state.inputText} underlineColorAndroid={'transparent'} placeholder={'Adicione um comentario...'} multiline={true} onChangeText={(inputText)=>this.setState({inputText})}/>	
 				        <TouchableHighlight style={styles.sendButton} onPress={this.sendMsg}>
 			                <Image style={styles.addImage} source={require('../assets/images/add.png')}/>
 				        </TouchableHighlight>  	
@@ -158,13 +157,16 @@ const styles = StyleSheet.create({
 		marginRight:10
     },
     input:{
-		width:260,
+		width:290,
 		minHeight:50,
 		maxHeight:160,
 		fontSize:17,
-		backgroundColor:'#DDDDDD',
+		backgroundColor:'#FFFFFF',
 		margin:10,
-		borderRadius:5
+		marginLeft:5,
+		marginRight:5,
+		borderRadius:5,
+		paddingLeft:10
 	},
 	addImage:{
 		width:52,
